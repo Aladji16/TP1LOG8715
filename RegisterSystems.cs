@@ -9,6 +9,7 @@ public class RegisterSystems
 
         // AJOUTEZ VOS SYSTEMS ICI
         toRegister.Add(new CreateCircleSystem());
+        toRegister.Add(new MoveCirclesSystem());
         return toRegister;
     }
 }

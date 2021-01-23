@@ -10,7 +10,6 @@ public class CreateCircleSystem : ISystem
     private int compteur = 0;
     private ECSManager manager = ECSManager.Instance;
     private Config.ShapeConfig config;
-    private List<ISystem> tests = new List<ISystem>();
 
 
     public void UpdateSystem()
@@ -18,9 +17,8 @@ public class CreateCircleSystem : ISystem
         if (compteur == 0)
         {
             config.size = 2;
-            config.initialPos = new Vector2(-1f, -1f);
-            config.initialSpeed = new Vector2(1f, 0f);
-            tests = manager.AllSystems;
+            config.initialPos = new Vector2(0f, 0f);
+            //config.initialSpeed = new Vector2(1f, 0f);
             manager.CreateShape(0, config);
             manager.UpdateShapePosition(0, config.initialPos);
             
