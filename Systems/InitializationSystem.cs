@@ -26,21 +26,18 @@ public class InitializationSystem : ISystem
                 posComponent.id = compteur;
                 posComponent.pos = config.initialPos;
                 world.PositionComponents.Add(posComponent);
-                //world.AddPosComponent(posComponent);
 
                 SpeedComponent spdComponent = new SpeedComponent();
                 spdComponent.id = compteur;
                 spdComponent.speed = config.initialSpeed;
                 world.SpeedComponents.Add(spdComponent);
 
-                //world.AddSpeedComponent(spdComponent);
 
 
                 SizeComponent sizeComponent = new SizeComponent();
                 sizeComponent.id = compteur;
                 sizeComponent.size = config.size;
                 world.SizeComponents.Add(sizeComponent);
-                //world.AddSizeComponent(sizeComponent);
 
 
                 compteur++;

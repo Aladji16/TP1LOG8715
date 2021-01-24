@@ -33,5 +33,5 @@ public class SaveStateSystem : ISystem
 
     //}
 
-    public String Name => "SaveStateSytem";
+    public String Name => "SaveStateSystem";
 }
