@@ -19,10 +19,8 @@ MonoBehaviour:
     initialSpeed: {x: 0, y: -0.01}
   - initialPos: {x: 5, y: 4}
     size: 3
-    initialSpeed: {x: 1, y: 3}
-  - initialPos: {x: 2, y: 2}
-    size: 2
-    initialSpeed: {x: 3, y: 1}
+    initialSpeed: {x: -0.01, y: 0}
+  - initialPos: {x: -3, y: 3}
     size: 5
     initialSpeed: {x: 0.01, y: 0}
   _systemsEnabled:
