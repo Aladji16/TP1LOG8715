@@ -8,8 +8,13 @@ public class RegisterSystems
         List<ISystem> toRegister = new List<ISystem>();
 
         // AJOUTEZ VOS SYSTEMS ICI
-        toRegister.Add(new CreateCircleSystem());
-        toRegister.Add(new MoveCirclesSystem());
+        
+        toRegister.Add(new InitializationSystem());
+        toRegister.Add(new CollisionSystem());
+        toRegister.Add(new PositionUpdateSystem());
+        toRegister.Add(new RestoreStateSystem());
+        toRegister.Add(new SaveStateSystem());
+        toRegister.Add(new TagSystem());
         return toRegister;
     }
 }
