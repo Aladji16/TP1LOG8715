@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSize: 1
   allShapesToSpawn:
-  - initialPos: {x: -5, y: 0}
+  - initialPos: {x: 1, y: 0}
+    size: 1
+    initialSpeed: {x: 0, y: -0.01}
+  - initialPos: {x: 5, y: 4}
     size: 3
     initialSpeed: {x: 1, y: 3}
   - initialPos: {x: 2, y: 2}
     size: 2
     initialSpeed: {x: 3, y: 1}
+    size: 5
+    initialSpeed: {x: 0.01, y: 0}
   _systemsEnabled:
     keys:
     - InitializationSystem
@@ -28,4 +33,6 @@ MonoBehaviour:
     - CollisionSystem
     - SaveStateSystem
     - RestoreStateSystem
-    values: 010101010101
+    - Create Circle
+    - Move Circle
+    values: 0000000000000101
