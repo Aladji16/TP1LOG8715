@@ -114,6 +114,4 @@ public interface IComponent
 public class EntityComponent : IComponent
 {
     public uint id;
-    public Vector2 pos;
-    public Vector2 speed;
 }
