@@ -7,20 +7,19 @@ using UnityEngine;
 
 public class MoveCirclesSystem : ISystem
 {
-    private int compteur = 0;
+    private uint compteur = 0;
     private ECSManager manager = ECSManager.Instance;
 
 
     public void UpdateSystem()
     {
-        //if (compteur == 0)
-        //{
-            //manager.CreateShape(0, config);
-            manager.UpdateShapePosition(0, new Vector2(compteur/100, compteur/100));
+        compteur = 0;
 
-
+        foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)
+        {
+            manager.UpdateShapePosition(compteur, config.initialPos);//changer pour currentPos + currentSpeed une fois les components implementés
             compteur += 1;
-        //}
+        }
         //Debug.Log("TESTEST");
     }
 

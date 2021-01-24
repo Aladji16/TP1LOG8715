@@ -7,25 +7,25 @@ using UnityEngine;
 
 public class CreateCircleSystem : ISystem
 {
-    private int compteur = 0;
+    private uint compteur = 0;
+    private bool isInit = false;
     private ECSManager manager = ECSManager.Instance;
-    private Config.ShapeConfig config;
-
 
     public void UpdateSystem()
     {
-        if (compteur == 0)
+        if (!isInit)
         {
-            config.size = 2;
-            config.initialPos = new Vector2(0f, 0f);
-            //config.initialSpeed = new Vector2(1f, 0f);
-            manager.CreateShape(0, config);
-            manager.UpdateShapePosition(0, config.initialPos);
-            
-
-            compteur += 1;
+            foreach(Config.ShapeConfig config in manager.Config.allShapesToSpawn)
+            {
+                manager.CreateShape(compteur, config);
+                manager.UpdateShapePosition(compteur, config.initialPos);
+                //à ajouter: la définition des components vitesse, position et taille
+                compteur++;
+            }
+            isInit = true;
+            Debug.Log("Compteur "+ compteur);
         }
-        //Debug.Log("TESTEST");
+        
     }
 
     public void createCircle()
