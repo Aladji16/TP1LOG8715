@@ -13,6 +13,9 @@ public class CollisionSystem : ISystem
 
     public void UpdateSystem()
     {
+
+
+    //https://www.developpez.net/forums/d728317/java/interfaces-graphiques-java/graphisme/2d/savoir-cercles-se-touchent/
         //    if (!isInit)
         //    {
         //        foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)

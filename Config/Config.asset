@@ -31,7 +31,4 @@ MonoBehaviour:
     - CollisionSystem
     - SaveStateSystem
     - RestoreStateSystem
-    - Create Circle
-    - Move Circle
-    - SaveStateSytem
-    values: 000000000000010101
+    values: 010101010101
