@@ -52,16 +52,44 @@ public class CollisionSystem : ISystem
                 newSizeComp1.id = world.SizeComponents[i].id;
                 newSizeComp1.size = world.SizeComponents[i].initialSize;
                 newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
+                float origSize = world.SizeComponents[i].initialSize;
 
-                //comme la taille augmente, le cercle est déjà en dehors des bords, il faut donc le rentrer dans le cadre (A FAIRE)
+                //comme la taille augmente, le cercle est déjà en dehors des bords, il faut donc le rentrer dans le cadre 
+                //il faudra faire une disjonction de 4 cas *après* le changement de taille : 
+                /*
+                 * cercle dépasse en haut
+                 * cercle dépasse en bas
+                 * cercle dépasse à droite
+                 * cercle dépasse à gauche
+                 * 
+                 */
 
-                //PositionComponent newPositionComponent;
-                //newPositionComponent.id = world.PositionComponents[i].id;
-                //newPositionComponent.pos = world.PositionComponents[i].pos + world.SpeedComponents[i].speed;
+                PositionComponent newPositionComponent;
+                newPositionComponent.id = world.PositionComponents[i].id;
+                newPositionComponent.pos = pos1;
+                if (newPositionComponent.pos.y + (origSize/2f) >= height) //en haut
+                {
+                    newPositionComponent.pos.y = height - (origSize / 2f);
+                }
+
+                if (newPositionComponent.pos.y - (origSize / 2f) <= -height) //en bas
+                {
+                    newPositionComponent.pos.y = -height + (origSize / 2f);
+                }
+
+                if (newPositionComponent.pos.x + (origSize / 2f) >= width) //à droite
+                {
+                    newPositionComponent.pos.x = width - (origSize / 2f);
+                }
+
+                if (newPositionComponent.pos.x - (origSize / 2f) <= -width) //à gauche
+                {
+                    newPositionComponent.pos.x = -width + (origSize / 2f);
+                }
 
 
                 //mise à jour des infos dans world et manager
-                //world.PositionComponents[i] = newPositionComponent;
+                world.PositionComponents[i] = newPositionComponent;
                 manager.UpdateShapePosition(world.PositionComponents[i].id, world.PositionComponents[i].pos);
                 world.SizeComponents[i] = newSizeComp1;
 
