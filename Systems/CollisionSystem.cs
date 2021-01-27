@@ -42,16 +42,33 @@ public class CollisionSystem : ISystem
             if (Math.Abs(pos1.x) + (size1 / 2f)  >= width || Math.Abs(pos1.y) + (size1 / 2f) >= height)
             {
                 collisionExists = true;
-                
 
                 SpeedComponent newSpeedComp1;
 
                 newSpeedComp1.id = world.SpeedComponents[i].id;
                 newSpeedComp1.speed = -world.SpeedComponents[i].speed;
-                             
-                world.SpeedComponents[i] = newSpeedComp1;
-                
 
+                SizeComponent newSizeComp1;
+                newSizeComp1.id = world.SizeComponents[i].id;
+                newSizeComp1.size = world.SizeComponents[i].initialSize;
+                newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
+
+                //comme la taille augmente, le cercle est déjà en dehors des bords, il faut donc le rentrer dans le cadre (A FAIRE)
+
+                //PositionComponent newPositionComponent;
+                //newPositionComponent.id = world.PositionComponents[i].id;
+                //newPositionComponent.pos = world.PositionComponents[i].pos + world.SpeedComponents[i].speed;
+
+
+                //mise à jour des infos dans world et manager
+                //world.PositionComponents[i] = newPositionComponent;
+                manager.UpdateShapePosition(world.PositionComponents[i].id, world.PositionComponents[i].pos);
+                world.SizeComponents[i] = newSizeComp1;
+
+                manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
+                world.SpeedComponents[i] = newSpeedComp1;
+
+                
 
 
             }
