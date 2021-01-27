@@ -42,18 +42,17 @@ public class CollisionSystem : ISystem
             if (Math.Abs(pos1.x) + (size1 / 2f)  >= width || Math.Abs(pos1.y) + (size1 / 2f) >= height)
             {
                 collisionExists = true;
+                
 
                 SpeedComponent newSpeedComp1;
 
                 newSpeedComp1.id = world.SpeedComponents[i].id;
                 newSpeedComp1.speed = -world.SpeedComponents[i].speed;
-
-
-
-                //mise à jour des infos dans world et manager
+                             
                 world.SpeedComponents[i] = newSpeedComp1;
+                
 
-                //A FAIRE : mettre à jour la taille par rapport à la taille originale
+
 
             }
 
@@ -96,6 +95,7 @@ public class CollisionSystem : ISystem
 
                     newSizeComp1.id = world.SizeComponents[i].id;
                     newSizeComp1.size = world.SizeComponents[i].size / 2f;
+                    newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
 
 
                     newSpeedComp2.id = world.SpeedComponents[j].id;
@@ -103,6 +103,7 @@ public class CollisionSystem : ISystem
 
                     newSizeComp2.id = world.SizeComponents[j].id;
                     newSizeComp2.size = world.SizeComponents[j].size / 2f;
+                    newSizeComp2.initialSize = world.SizeComponents[j].initialSize;
 
 
                     //mise à jour des infos dans world et manager

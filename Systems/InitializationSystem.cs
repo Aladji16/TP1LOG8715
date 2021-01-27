@@ -18,8 +18,7 @@ public class InitializationSystem : ISystem
         if (!isInit)
         {
 
-            Debug.Log("Screen Height : " + Screen.height/100f);
-            Debug.Log("Screen Height : " + Screen.width/100f);
+            
 
             foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)
             {
@@ -41,6 +40,7 @@ public class InitializationSystem : ISystem
                 SizeComponent sizeComponent = new SizeComponent();
                 sizeComponent.id = compteur;
                 sizeComponent.size = config.size;
+                sizeComponent.initialSize = config.size;
                 world.SizeComponents.Add(sizeComponent);
 
 

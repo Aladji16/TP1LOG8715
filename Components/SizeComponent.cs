@@ -7,4 +7,5 @@ public struct SizeComponent : IComponent
 {
 	public uint id;
 	public float size;
+	public float initialSize;
 }
