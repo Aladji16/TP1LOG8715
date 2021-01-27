@@ -39,7 +39,7 @@ public class CollisionSystem : ISystem
             float width = Screen.width / 100f;
             float height = Screen.height / 100f;
 
-            if (Math.Abs(pos1.x) + (size1 / 2f)  >= width || Math.Abs(pos1.y) + (size1 / 2f) >= height)
+            if (Math.Abs(pos1.x) + (size1 / 2f)  > width || Math.Abs(pos1.y) + (size1 / 2f) > height)
             {
                 collisionExists = true;
 
@@ -67,22 +67,22 @@ public class CollisionSystem : ISystem
                 PositionComponent newPositionComponent;
                 newPositionComponent.id = world.PositionComponents[i].id;
                 newPositionComponent.pos = pos1;
-                if (newPositionComponent.pos.y + (origSize/2f) >= height) //en haut
+                if (newPositionComponent.pos.y + (origSize/2f) > height) //en haut
                 {
                     newPositionComponent.pos.y = height - (origSize / 2f);
                 }
 
-                if (newPositionComponent.pos.y - (origSize / 2f) <= -height) //en bas
+                if (newPositionComponent.pos.y - (origSize / 2f) < -height) //en bas
                 {
                     newPositionComponent.pos.y = -height + (origSize / 2f);
                 }
 
-                if (newPositionComponent.pos.x + (origSize / 2f) >= width) //à droite
+                if (newPositionComponent.pos.x + (origSize / 2f) > width) //à droite
                 {
                     newPositionComponent.pos.x = width - (origSize / 2f);
                 }
 
-                if (newPositionComponent.pos.x - (origSize / 2f) <= -width) //à gauche
+                if (newPositionComponent.pos.x - (origSize / 2f) < -width) //à gauche
                 {
                     newPositionComponent.pos.x = -width + (origSize / 2f);
                 }

@@ -18,17 +18,15 @@ public class InitializationSystem : ISystem
         if (!isInit)
         {
 
-            
+            float width = Screen.width / 100f;
+            float height = Screen.height / 100f;
 
             foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)
             {
                 manager.CreateShape(compteur, config);
                 manager.UpdateShapePosition(compteur, config.initialPos);
-                
-                PositionComponent posComponent = new PositionComponent();
-                posComponent.id = compteur;
-                posComponent.pos = config.initialPos;
-                world.PositionComponents.Add(posComponent);
+
+
 
                 SpeedComponent spdComponent = new SpeedComponent();
                 spdComponent.id = compteur;
@@ -42,6 +40,43 @@ public class InitializationSystem : ISystem
                 sizeComponent.size = config.size;
                 sizeComponent.initialSize = config.size;
                 world.SizeComponents.Add(sizeComponent);
+
+
+                PositionComponent posComponent = new PositionComponent();
+                posComponent.id = compteur;
+                posComponent.pos = config.initialPos;
+
+                /* prendre en compte le cas où : 
+                 * cercle dépasse en haut
+                 * cercle dépasse en bas
+                 * cercle dépasse à droite
+                 * cercle dépasse à gauche
+                 * 
+                 */
+
+                if (posComponent.pos.y + (config.size / 2f) > height) //en haut
+                {
+                    posComponent.pos.y = height - (config.size / 2f);
+                }
+
+                if (posComponent.pos.y - (config.size / 2f) < -height) //en bas
+                {
+                    posComponent.pos.y = -height + (config.size / 2f);
+                }
+
+                if (posComponent.pos.x + (config.size / 2f) > width) //à droite
+                {
+                    posComponent.pos.x = width - (config.size / 2f);
+                }
+
+                if (posComponent.pos.x - (config.size / 2f) < -width) //à gauche
+                {
+                    posComponent.pos.x = -width + (config.size / 2f);
+                }
+
+                world.PositionComponents.Add(posComponent);
+
+
 
 
                 compteur++;
