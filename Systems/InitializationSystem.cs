@@ -17,6 +17,10 @@ public class InitializationSystem : ISystem
         //création des cercles
         if (!isInit)
         {
+
+            Debug.Log("Screen Height : " + Screen.height/100f);
+            Debug.Log("Screen Height : " + Screen.width/100f);
+
             foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)
             {
                 manager.CreateShape(compteur, config);

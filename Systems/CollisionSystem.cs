@@ -23,17 +23,43 @@ public class CollisionSystem : ISystem
     public void UpdateSystem()
     {
        
-        for (int i = 0; i < world.PositionComponents.Count - 1; i++)
+        for (int i = 0; i < world.PositionComponents.Count; i++)
         {
+
+
 
 
             bool collisionExists = false;
 
             Vector2 pos1 = world.PositionComponents[i].pos;
             float size1 = world.SizeComponents[i].size;
-            //on vérifie si la taille est supérieure à la taille min
 
-            if (size1 > manager.Config.minSize)
+
+            //collision si on est sur un bord de l'écran
+            float width = Screen.width / 100f;
+            float height = Screen.height / 100f;
+
+            if (Math.Abs(pos1.x) + (size1 / 2f)  >= width || Math.Abs(pos1.y) + (size1 / 2f) >= height)
+            {
+                collisionExists = true;
+
+                SpeedComponent newSpeedComp1;
+
+                newSpeedComp1.id = world.SpeedComponents[i].id;
+                newSpeedComp1.speed = -world.SpeedComponents[i].speed;
+
+
+
+                //mise à jour des infos dans world et manager
+                world.SpeedComponents[i] = newSpeedComp1;
+
+                //A FAIRE : mettre à jour la taille par rapport à la taille originale
+
+            }
+
+
+            //on vérifie si la taille est supérieure à la taille min
+            if (size1 > manager.Config.minSize && collisionExists == false)
             {
                 int j = i + 1;
                 //Vector2 pos2 = world.PositionComponents[j].pos;
