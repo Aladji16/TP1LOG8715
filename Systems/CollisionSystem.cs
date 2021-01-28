@@ -5,6 +5,7 @@ using UnityEngine;
 
 
 
+
 public class CollisionSystem : ISystem
 {
     private ECSManager manager = ECSManager.Instance;
@@ -40,7 +41,7 @@ public class CollisionSystem : ISystem
             float height = Screen.height / 100f;
 
             if ((Math.Abs(pos1.x) + (size1 / 2f)  > width || Math.Abs(pos1.y) + (size1 / 2f) > height))
-                //on prend le choix de rentrer les cercles même s'ils sont statiques
+                
             {
                 collisionExists = true;
 
@@ -56,6 +57,12 @@ public class CollisionSystem : ISystem
                 newSizeComp1.size = world.SizeComponents[i].initialSize;
                 newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
                 float origSize = world.SizeComponents[i].initialSize;
+
+                if (origSize >= manager.Config.minSize)
+                {
+                    manager.UpdateShapeColor(world.SizeComponents[i].id, UnityEngine.Color.blue);
+
+                }
 
                 //comme la taille augmente, le cercle est déjà en dehors des bords, il faut donc le rentrer dans le cadre 
                 //il faudra faire une disjonction de 4 cas *après* le changement de taille : 
@@ -185,7 +192,19 @@ public class CollisionSystem : ISystem
                     world.SizeComponents[j] = newSizeComp2;
 
                     manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
+                    if (world.SizeComponents[i].size < manager.Config.minSize)
+                    {
+                        manager.UpdateShapeColor(world.SizeComponents[i].id, UnityEngine.Color.green);
+
+                    }
+
+
                     manager.UpdateShapeSize(world.SizeComponents[j].id, world.SizeComponents[j].size);
+                    if (world.SizeComponents[j].size < manager.Config.minSize)
+                    {
+                        manager.UpdateShapeColor(world.SizeComponents[j].id, UnityEngine.Color.green);
+
+                    }
 
 
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 
@@ -83,6 +84,25 @@ public class InitializationSystem : ISystem
                 world.PositionComponents.Add(posComponent);
 
 
+
+                if (spdComponent.isStatic == true)
+                {
+                    manager.UpdateShapeColor(compteur, UnityEngine.Color.red);
+
+                }
+
+                else if (sizeComponent.size < manager.Config.minSize)
+                {
+                    manager.UpdateShapeColor(compteur, UnityEngine.Color.green);
+
+                }
+
+
+                else
+                {
+                    manager.UpdateShapeColor(compteur, UnityEngine.Color.blue);
+
+                }
 
 
                 compteur++;
