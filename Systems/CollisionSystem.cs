@@ -103,7 +103,7 @@ public class CollisionSystem : ISystem
 
 
             //on vérifie si la taille est supérieure à la taille min
-            if (size1 > manager.Config.minSize && collisionExists == false)
+            if (size1 >= manager.Config.minSize && collisionExists == false)
             {
                 int j = i + 1;
                 //Vector2 pos2 = world.PositionComponents[j].pos;
@@ -115,7 +115,7 @@ public class CollisionSystem : ISystem
                     //on vérifie si la taille est supérieure à la taille min
                     Vector2 pos2 = world.PositionComponents[j].pos;
 
-                    if (size2 > manager.Config.minSize)
+                    if (size2 >= manager.Config.minSize)
                     {
                         collisionExists = collision(pos1, size1, pos2, size2);
                     }
