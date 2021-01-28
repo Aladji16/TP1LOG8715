@@ -22,7 +22,7 @@ MonoBehaviour:
     initialSpeed: {x: -0.01, y: 0}
   - initialPos: {x: -3, y: 3}
     size: 5
-    initialSpeed: {x: 0.01, y: 0}
+    initialSpeed: {x: 0.01, y: -0.01}
   _systemsEnabled:
     keys:
     - InitializationSystem
