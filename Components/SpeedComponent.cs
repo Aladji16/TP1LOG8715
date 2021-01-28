@@ -6,4 +6,5 @@ public struct SpeedComponent : IComponent
 {
 	public uint id;
 	public Vector2 speed;
+	public bool isStatic;
 }

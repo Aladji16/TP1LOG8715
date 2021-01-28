@@ -39,7 +39,8 @@ public class CollisionSystem : ISystem
             float width = Screen.width / 100f;
             float height = Screen.height / 100f;
 
-            if (Math.Abs(pos1.x) + (size1 / 2f)  > width || Math.Abs(pos1.y) + (size1 / 2f) > height)
+            if ((Math.Abs(pos1.x) + (size1 / 2f)  > width || Math.Abs(pos1.y) + (size1 / 2f) > height))
+                //on prend le choix de rentrer les cercles même s'ils sont statiques
             {
                 collisionExists = true;
 
@@ -47,6 +48,8 @@ public class CollisionSystem : ISystem
 
                 newSpeedComp1.id = world.SpeedComponents[i].id;
                 newSpeedComp1.speed = -world.SpeedComponents[i].speed;
+                newSpeedComp1.isStatic = world.SpeedComponents[i].isStatic;
+
 
                 SizeComponent newSizeComp1;
                 newSizeComp1.id = world.SizeComponents[i].id;
@@ -137,16 +140,39 @@ public class CollisionSystem : ISystem
 
                     newSpeedComp1.id = world.SpeedComponents[i].id;
                     newSpeedComp1.speed = -world.SpeedComponents[i].speed;
+                    newSpeedComp1.isStatic = world.SpeedComponents[i].isStatic;
+
 
                     newSizeComp1.id = world.SizeComponents[i].id;
-                    newSizeComp1.size = world.SizeComponents[i].size / 2f;
+                    if (newSpeedComp1.isStatic == false)
+                    {
+                        newSizeComp1.size = world.SizeComponents[i].size / 2f;
+                    }
+                    else
+                    {
+                        newSizeComp1.size = world.SizeComponents[i].size;
+
+                    }
                     newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
 
 
                     newSpeedComp2.id = world.SpeedComponents[j].id;
                     newSpeedComp2.speed = -world.SpeedComponents[j].speed;
+                    newSpeedComp2.isStatic = world.SpeedComponents[i].isStatic;
+
+
 
                     newSizeComp2.id = world.SizeComponents[j].id;
+                    if (newSpeedComp2.isStatic == false)
+                    {
+                        newSizeComp2.size = world.SizeComponents[j].size / 2f;
+                    }
+
+                    else
+                    {
+                        newSizeComp2.size = world.SizeComponents[i].size;
+
+                    }
                     newSizeComp2.size = world.SizeComponents[j].size / 2f;
                     newSizeComp2.initialSize = world.SizeComponents[j].initialSize;
 

@@ -31,6 +31,12 @@ public class InitializationSystem : ISystem
                 SpeedComponent spdComponent = new SpeedComponent();
                 spdComponent.id = compteur;
                 spdComponent.speed = config.initialSpeed;
+                spdComponent.isStatic = false;
+                if (compteur <= manager.Config.allShapesToSpawn.Count/4)
+                {
+                    spdComponent.isStatic = true;
+                    spdComponent.speed = new Vector2(0f, 0f);
+                }
                 world.SpeedComponents.Add(spdComponent);
 
 
@@ -81,6 +87,9 @@ public class InitializationSystem : ISystem
 
                 compteur++;
             }
+
+
+
             isInit = true;
             //Debug.Log("Compteur " + compteur);
 
