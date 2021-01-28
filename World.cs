@@ -9,7 +9,9 @@ public class World
     [SerializeField]
     private List<PositionComponent> _posComponents = new List<PositionComponent>();
     private List<SpeedComponent> _speedComponents = new List<SpeedComponent>();
+    private List<TypeComponent> _typeComponents = new List<TypeComponent>();
     private List<SizeComponent> _sizeComponents = new List<SizeComponent>();
+    private List<ColorComponent> _colorComponents = new List<ColorComponent>();
     #endregion
 
     #region Singleton
@@ -34,11 +36,12 @@ public class World
 
 
     public List<SpeedComponent> SpeedComponents  {  get { return _speedComponents; } }
- 
+
+    public List<TypeComponent> TypeComponents { get { return _typeComponents; } }
 
     public List<SizeComponent> SizeComponents { get { return _sizeComponents; } }
-        
- 
+
+    public List<ColorComponent> ColorComponents { get { return _colorComponents; } }
 
 
     #region Public API
@@ -66,10 +69,10 @@ public class World
 
     //public void AddPosComponent(PositionComponent posComponent)
     //{
-        
+
     //    _posComponents.Add(posComponent);
     //}
-    
+
 
     //public void AddSizeComponent(SizeComponent sizeComponent)
     //{

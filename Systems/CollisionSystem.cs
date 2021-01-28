@@ -28,8 +28,6 @@ public class CollisionSystem : ISystem
         {
 
 
-
-
             bool collisionExists = false;
 
             Vector2 pos1 = world.PositionComponents[i].pos;
@@ -49,7 +47,6 @@ public class CollisionSystem : ISystem
 
                 newSpeedComp1.id = world.SpeedComponents[i].id;
                 newSpeedComp1.speed = -world.SpeedComponents[i].speed;
-                newSpeedComp1.isStatic = world.SpeedComponents[i].isStatic;
 
 
                 SizeComponent newSizeComp1;
@@ -60,6 +57,11 @@ public class CollisionSystem : ISystem
 
                 if (origSize >= manager.Config.minSize)
                 {
+                    ColorComponent newColComponent = new ColorComponent();
+                    newColComponent.id = world.SizeComponents[i].id;
+                    newColComponent.color = UnityEngine.Color.blue;
+                    world.ColorComponents[i] = newColComponent;
+
                     manager.UpdateShapeColor(world.SizeComponents[i].id, UnityEngine.Color.blue);
 
                 }
@@ -147,11 +149,9 @@ public class CollisionSystem : ISystem
 
                     newSpeedComp1.id = world.SpeedComponents[i].id;
                     newSpeedComp1.speed = -world.SpeedComponents[i].speed;
-                    newSpeedComp1.isStatic = world.SpeedComponents[i].isStatic;
-
 
                     newSizeComp1.id = world.SizeComponents[i].id;
-                    if (newSpeedComp1.isStatic == false)
+                    if (world.TypeComponents[i].isStatic == false)
                     {
                         newSizeComp1.size = world.SizeComponents[i].size / 2f;
                     }
@@ -165,12 +165,10 @@ public class CollisionSystem : ISystem
 
                     newSpeedComp2.id = world.SpeedComponents[j].id;
                     newSpeedComp2.speed = -world.SpeedComponents[j].speed;
-                    newSpeedComp2.isStatic = world.SpeedComponents[i].isStatic;
-
 
 
                     newSizeComp2.id = world.SizeComponents[j].id;
-                    if (newSpeedComp2.isStatic == false)
+                    if (world.TypeComponents[i].isStatic == false)
                     {
                         newSizeComp2.size = world.SizeComponents[j].size / 2f;
                     }
@@ -194,6 +192,11 @@ public class CollisionSystem : ISystem
                     manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
                     if (world.SizeComponents[i].size < manager.Config.minSize)
                     {
+                        ColorComponent newColComponent = new ColorComponent();
+                        newColComponent.id = world.SizeComponents[i].id;
+                        newColComponent.color = UnityEngine.Color.green;
+                        world.ColorComponents[i] = newColComponent;
+
                         manager.UpdateShapeColor(world.SizeComponents[i].id, UnityEngine.Color.green);
 
                     }
@@ -202,6 +205,11 @@ public class CollisionSystem : ISystem
                     manager.UpdateShapeSize(world.SizeComponents[j].id, world.SizeComponents[j].size);
                     if (world.SizeComponents[j].size < manager.Config.minSize)
                     {
+                        ColorComponent newColComponent = new ColorComponent();
+                        newColComponent.id = world.SizeComponents[j].id;
+                        newColComponent.color = UnityEngine.Color.green;
+                        world.ColorComponents[j] = newColComponent;
+
                         manager.UpdateShapeColor(world.SizeComponents[j].id, UnityEngine.Color.green);
 
                     }

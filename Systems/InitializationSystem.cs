@@ -32,14 +32,16 @@ public class InitializationSystem : ISystem
                 SpeedComponent spdComponent = new SpeedComponent();
                 spdComponent.id = compteur;
                 spdComponent.speed = config.initialSpeed;
-                spdComponent.isStatic = false;
+
+                TypeComponent typeComponent = new TypeComponent();
+                typeComponent.isStatic = false;
                 if (compteur <= manager.Config.allShapesToSpawn.Count/4)
                 {
-                    spdComponent.isStatic = true;
+                    typeComponent.isStatic = true;
                     spdComponent.speed = new Vector2(0f, 0f);
                 }
                 world.SpeedComponents.Add(spdComponent);
-
+                world.TypeComponents.Add(typeComponent);
 
 
                 SizeComponent sizeComponent = new SizeComponent();
@@ -85,14 +87,18 @@ public class InitializationSystem : ISystem
 
 
 
-                if (spdComponent.isStatic == true)
+                ColorComponent colComponent = new ColorComponent();
+                colComponent.id = compteur;
+                if (typeComponent.isStatic == true)
                 {
+                    colComponent.color = UnityEngine.Color.red;
                     manager.UpdateShapeColor(compteur, UnityEngine.Color.red);
 
                 }
 
                 else if (sizeComponent.size < manager.Config.minSize)
                 {
+                    colComponent.color = UnityEngine.Color.green;
                     manager.UpdateShapeColor(compteur, UnityEngine.Color.green);
 
                 }
@@ -100,10 +106,11 @@ public class InitializationSystem : ISystem
 
                 else
                 {
+                    colComponent.color = UnityEngine.Color.blue;
                     manager.UpdateShapeColor(compteur, UnityEngine.Color.blue);
 
                 }
-
+                world.ColorComponents.Add(colComponent);
 
                 compteur++;
             }

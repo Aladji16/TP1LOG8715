@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct SpeedComponent : IComponent
+
+public struct ColorComponent : IComponent
 {
 	public uint id;
-	public Vector2 speed;
+	public Color color;
 }
