@@ -25,7 +25,8 @@ public class CircleState
 
 public class SaveStateSystem : ISystem
 {
-
+    private ECSManager manager = ECSManager.Instance;
+    private World world = World.Instance;
     //private int frameCounter = 1;
     private List<List<CircleState>> savedStates = new List<List<CircleState>>();
 
@@ -41,11 +42,11 @@ public class SaveStateSystem : ISystem
         List<CircleState> actualState = new List<CircleState>();
         for (int i = 0; i < world.PositionComponents.Count; i++)
         {
-            ColorComponent color = world.ColorComponent[i];
-            PositionComponent pos = world.PositionComponent[i];
-            SizeComponent size = world.SizeComponent[i];
-            SpeedComponent speed = world.SpeedComponent[i];
-            TypeComponent type = world.TypeComponent[i];
+            ColorComponent color = world.ColorComponents[i];
+            PositionComponent pos = world.PositionComponents[i];
+            SizeComponent size = world.SizeComponents[i];
+            SpeedComponent speed = world.SpeedComponents[i];
+            TypeComponent type = world.TypeComponents[i];
             actualState.Add(new CircleState(color, pos, size, speed, type));
         }
 
