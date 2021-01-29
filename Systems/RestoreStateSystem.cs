@@ -7,31 +7,46 @@ using UnityEngine;
 
 public class RestoreStateSystem : ISystem
 {
-    //private uint compteur = 0;
-    //private bool isInit = false;
-    //private ECSManager manager = ECSManager.Instance;
+    private ECSManager manager = ECSManager.Instance;
+    private World world = World.Instance;
 
     public void UpdateSystem()
     {
-        //    if (!isInit)
-        //    {
-        //        foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)
-        //        {
-        //            manager.CreateShape(compteur, config);
-        //            manager.UpdateShapePosition(compteur, config.initialPos);
-        //            //à ajouter: la définition des components vitesse, position et taille
-        //            compteur++;
-        //        }
-        //        isInit = true;
-        //        Debug.Log("Compteur " + compteur);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!SaveStateSystem.cooldownActive)
+            {
+                List<CircleState> currentStates = SaveStateSystem.savedStates[0];
+                for (int i = 0; i < currentStates.Count; i++)
+                {
+                    CircleState current_state_i = currentStates[i];
+
+                    ColorComponent color = current_state_i.colorComponent;
+                    PositionComponent pos = current_state_i.positionComponent;
+                    SizeComponent size = current_state_i.sizeComponent;
+                    SpeedComponent speed = current_state_i.speedComponent;
+                    TypeComponent type = current_state_i.typeComponent;
+
+
+                    world.PositionComponents[i] = pos;
+                    manager.UpdateShapePosition(world.PositionComponents[i].id, world.PositionComponents[i].pos);
+
+                    world.ColorComponents[i] = color;
+                    manager.UpdateShapeColor(world.ColorComponents[i].id, world.ColorComponents[i].color);
+
+                    world.SizeComponents[i] = size;
+                    manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
+
+                    world.SpeedComponents[i] = speed;
+                    world.TypeComponents[i] = type;
+
+                }
+            }
+
+        }
     }
 
-    //}
 
-    //public void createCircle()
-    //{
-
-    //}
 
     public String Name => "RestoreStateSystem";
 }

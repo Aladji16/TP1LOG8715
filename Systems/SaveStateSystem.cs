@@ -4,13 +4,13 @@ using UnityEngine;
 
 
 //état pour chaque cercle
-public class CircleState
+public struct CircleState
 {
-    private ColorComponent colorComponent;
-    private PositionComponent positionComponent;
-    private SizeComponent sizeComponent;
-    private SpeedComponent speedComponent;
-    private TypeComponent typeComponent;
+    public ColorComponent colorComponent;
+    public PositionComponent positionComponent;
+    public SizeComponent sizeComponent;
+    public SpeedComponent speedComponent;
+    public TypeComponent typeComponent;
     
     public CircleState(ColorComponent color, PositionComponent pos, SizeComponent size, SpeedComponent speed, TypeComponent type)
     {
@@ -27,15 +27,40 @@ public class SaveStateSystem : ISystem
 {
     private ECSManager manager = ECSManager.Instance;
     private World world = World.Instance;
-    //private int frameCounter = 1;
-    private List<List<CircleState>> savedStates = new List<List<CircleState>>();
+    private float lastSpacePressTime = 0f;
+
+    public static List<List<CircleState>> savedStates = new List<List<CircleState>>();
+    public static bool cooldownActive = true; //on ne peut pas appuyer sur espace pendant les deux premières secondes
+
 
     public void UpdateSystem()
     {
-
-        if (savedStates.Count == 60) //si on a atteint une taille de 60, on a donc atteint 2 secondes de simulation
+        //Debug.Log(Time.time);
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            savedStates.RemoveAt(0); //on enlève l'élément d'il y a deux secondes, soit le premier élément de la liste
+            if (cooldownActive)
+            {
+                string timeRemaining = (2f - (Time.time - lastSpacePressTime)).ToString();
+                Debug.Log("Wait until the cooldown is over; time remaining in seconds : " + timeRemaining);
+
+            }
+
+            else
+            {
+                lastSpacePressTime = Time.time;
+                Debug.Log("Space button pressed; activating 2 seconds cooldown");
+                savedStates.RemoveRange(1, savedStates.Count - 1);
+                cooldownActive = true;
+                //Debug.Log("il y a surement une erreur là");
+            }
+        }
+
+
+        if (Time.time - lastSpacePressTime  >= 2f) //si on a atteint 2 secondes après le dernier appui d'espace (ou après le début de la simulation)
+        {
+            savedStates.RemoveAt(0); //on enlève l'élément d'il y a 2 secondes, soit le premier élément de la liste
+            cooldownActive = false;
+
 
         }
 

@@ -37,10 +37,7 @@ public class PositionUpdateSystem : ISystem
         }
 
 
-        //AF : ajouter des conditions "si y a pas de collision détectée..."
-        //faire attention à la taille min; si le cercle est de taille < taille min, on prend pas en compte
-        //collision avec autre cercle
-        //si collision détectée avec autre cercle ou avec bout de terrain, MAJ les vitesses et les tailles
+        
     }
 
     public String Name => "PositionUpdateSystem";
