@@ -41,8 +41,13 @@ public class CollisionSystem : ISystem
 
 
                 //collision si on est sur un bord de l'écran
-                float width = Screen.width / 100f;
-                float height = Screen.height / 100f;
+                Camera cam = Camera.main;
+
+                Vector3 transfo = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+                float width = transfo.x;
+                float height = transfo.y;
+
 
                 if ((Math.Abs(pos1.x) + (size1 / 2f) > width || Math.Abs(pos1.y) + (size1 / 2f) > height))
 
@@ -82,7 +87,7 @@ public class CollisionSystem : ISystem
                      * 
                      */
 
-                    PositionComponent newPositionComponent;
+                    PositionComponent newPositionComponent; 
                     newPositionComponent.id = world.PositionComponents[i].id;
                     newPositionComponent.pos = pos1;
                     if (newPositionComponent.pos.y + (origSize / 2f) > height) //en haut
