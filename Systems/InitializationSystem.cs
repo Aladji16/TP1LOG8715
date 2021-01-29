@@ -18,9 +18,12 @@ public class InitializationSystem : ISystem
         //création des cercles
         if (!isInit)
         {
+            Camera cam = Camera.main;
 
-            float width = Screen.width / 100f;
-            float height = Screen.height / 100f;
+            Vector3 transfo = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+            float width = transfo.x;
+            float height = transfo.y;
 
             foreach (Config.ShapeConfig config in manager.Config.allShapesToSpawn)
             {
