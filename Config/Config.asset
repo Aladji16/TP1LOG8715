@@ -16,11 +16,14 @@ MonoBehaviour:
   allShapesToSpawn:
   - initialPos: {x: 0, y: 0}
     size: 3
-    initialSpeed: {x: 0, y: -0.01}
+    initialSpeed: {x: 0, y: -0.001}
   - initialPos: {x: 5, y: 4}
     size: 3
-    initialSpeed: {x: -0.01, y: 0}
+    initialSpeed: {x: -0.001, y: 0}
   - initialPos: {x: -3, y: 3}
+    size: 1
+    initialSpeed: {x: 0.01, y: -0.01}
+  - initialPos: {x: -3, y: 1}
     size: 5
     initialSpeed: {x: 0.01, y: -0.01}
   _systemsEnabled:

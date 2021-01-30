@@ -14,7 +14,6 @@ public class RegisterSystems
         toRegister.Add(new PositionUpdateSystem(false));
         toRegister.Add(new RestoreStateSystem());
         toRegister.Add(new SaveStateSystem());
-        toRegister.Add(new TagSystem());
         for (int i = 0; i < 4; i++)
         {
             toRegister.Add(new PositionUpdateSystem(true));
