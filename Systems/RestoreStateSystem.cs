@@ -25,7 +25,6 @@ public class RestoreStateSystem : ISystem
                     PositionComponent pos = current_state_i.positionComponent;
                     SizeComponent size = current_state_i.sizeComponent;
                     SpeedComponent speed = current_state_i.speedComponent;
-                    TypeComponent type = current_state_i.typeComponent;
 
 
                     world.PositionComponents[i] = pos;
@@ -38,7 +37,6 @@ public class RestoreStateSystem : ISystem
                     manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
 
                     world.SpeedComponents[i] = speed;
-                    world.TypeComponents[i] = type;
 
                 }
             }

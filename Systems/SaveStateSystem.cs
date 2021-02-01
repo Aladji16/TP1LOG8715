@@ -10,15 +10,13 @@ public struct CircleState
     public PositionComponent positionComponent;
     public SizeComponent sizeComponent;
     public SpeedComponent speedComponent;
-    public TypeComponent typeComponent;
     
-    public CircleState(ColorComponent color, PositionComponent pos, SizeComponent size, SpeedComponent speed, TypeComponent type)
+    public CircleState(ColorComponent color, PositionComponent pos, SizeComponent size, SpeedComponent speed)
     {
         colorComponent = color;
         positionComponent = pos;
         sizeComponent = size;
         speedComponent = speed;
-        typeComponent = type;
 
     }
 }
@@ -71,8 +69,7 @@ public class SaveStateSystem : ISystem
             PositionComponent pos = world.PositionComponents[i];
             SizeComponent size = world.SizeComponents[i];
             SpeedComponent speed = world.SpeedComponents[i];
-            TypeComponent type = world.TypeComponents[i];
-            actualState.Add(new CircleState(color, pos, size, speed, type));
+            actualState.Add(new CircleState(color, pos, size, speed));
         }
 
         savedStates.Add(actualState);
