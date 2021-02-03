@@ -11,6 +11,7 @@ public class World
     private List<SpeedComponent> _speedComponents = new List<SpeedComponent>();
     private List<TypeComponent> _typeComponents = new List<TypeComponent>();
     private List<SizeComponent> _sizeComponents = new List<SizeComponent>();
+    private List<InitialSizeComponent> _initsizeComponents = new List<InitialSizeComponent>();
     private List<ColorComponent> _colorComponents = new List<ColorComponent>();
     #endregion
 
@@ -32,57 +33,23 @@ public class World
     private World() { }
     #endregion
 
+
+
+
+    #region Public API
+
     public List<PositionComponent> PositionComponents { get { return _posComponents; } }
 
 
-    public List<SpeedComponent> SpeedComponents  {  get { return _speedComponents; } }
+    public List<SpeedComponent> SpeedComponents { get { return _speedComponents; } }
 
     public List<TypeComponent> TypeComponents { get { return _typeComponents; } }
 
     public List<SizeComponent> SizeComponents { get { return _sizeComponents; } }
 
+    public List<InitialSizeComponent> InitialSizeComponents { get { return _initsizeComponents; } }
+
     public List<ColorComponent> ColorComponents { get { return _colorComponents; } }
-
-
-    #region Public API
-
-    //public void SetComponentPos(uint id, Vector2 pos)
-    //{
-    //    //pour trouver le cercle avec l'id correspondant : https://docs.microsoft.com/fr-fr/dotnet/api/system.collections.generic.list-1.find?view=net-5.0
-    //    PositionComponent posComponent = _posComponents.Find(x => x.id == id);
-    //    posComponent.pos = pos;
-    //}
-
-    //public void SetComponentSpeed(uint id, Vector2 speed)
-    //{
-    //    SpeedComponent speedComponent = _speedComponents.Find(x => x.id == id);
-    //    speedComponent.speed = speed;
-
-    //}
-
-    //public void SetComponentSize(uint id, float size)
-    //{
-    //    SizeComponent sizeComponent = _sizeComponents.Find(x => x.id == id);
-    //    sizeComponent.size = size;
-    //}
-
-
-    //public void AddPosComponent(PositionComponent posComponent)
-    //{
-
-    //    _posComponents.Add(posComponent);
-    //}
-
-
-    //public void AddSizeComponent(SizeComponent sizeComponent)
-    //{
-    //    _sizeComponents.Add(sizeComponent);
-    //}
-
-    //public void AddSpeedComponent(SpeedComponent speedComponent)
-    //{
-    //    _speedComponents.Add(speedComponent);
-    //}
 
 
 

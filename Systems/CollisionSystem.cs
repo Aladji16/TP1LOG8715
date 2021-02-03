@@ -62,9 +62,8 @@ public class CollisionSystem : ISystem
 
                     SizeComponent newSizeComp1;
                     newSizeComp1.id = world.SizeComponents[i].id;
-                    newSizeComp1.size = world.SizeComponents[i].initialSize;
-                    newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
-                    float origSize = world.SizeComponents[i].initialSize;
+                    float origSize = world.InitialSizeComponents[i].size;
+                    newSizeComp1.size = origSize;
 
                     if (origSize >= manager.Config.minSize)
                     {
@@ -171,8 +170,6 @@ public class CollisionSystem : ISystem
                             newSizeComp1.size = world.SizeComponents[i].size;
 
                         }
-                        newSizeComp1.initialSize = world.SizeComponents[i].initialSize;
-
 
                         newSpeedComp2.id = world.SpeedComponents[j].id;
                         newSpeedComp2.speed = -world.SpeedComponents[j].speed;
@@ -190,8 +187,6 @@ public class CollisionSystem : ISystem
 
                         }
                         newSizeComp2.size = world.SizeComponents[j].size / 2f;
-                        newSizeComp2.initialSize = world.SizeComponents[j].initialSize;
-
 
                         //mise à jour des infos dans world et manager
                         world.SpeedComponents[i] = newSpeedComp1;

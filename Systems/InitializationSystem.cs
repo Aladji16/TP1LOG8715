@@ -50,9 +50,12 @@ public class InitializationSystem : ISystem
                 SizeComponent sizeComponent = new SizeComponent();
                 sizeComponent.id = compteur;
                 sizeComponent.size = config.size;
-                sizeComponent.initialSize = config.size;
                 world.SizeComponents.Add(sizeComponent);
 
+                InitialSizeComponent initSizeComponent = new InitialSizeComponent();
+                initSizeComponent.id = compteur;
+                initSizeComponent.size = config.size;
+                world.InitialSizeComponents.Add(initSizeComponent);
 
                 PositionComponent posComponent = new PositionComponent();
                 posComponent.id = compteur;
