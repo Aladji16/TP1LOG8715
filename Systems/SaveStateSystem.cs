@@ -25,7 +25,7 @@ public class SaveStateSystem : ISystem
 {
     private ECSManager manager = ECSManager.Instance;
     private World world = World.Instance;
-    private float lastSpacePressTime = 0f;
+    private float timestamp = 0f;
 
     public static List<List<CircleState>> savedStates = new List<List<CircleState>>();
     public static bool cooldownActive = true; //on ne peut pas appuyer sur espace pendant les deux premières secondes
@@ -33,50 +33,39 @@ public class SaveStateSystem : ISystem
 
     public void UpdateSystem()
     {
-        //Debug.Log(Time.time);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (cooldownActive)
-            {
-                string timeRemaining = (2f - (Time.time - lastSpacePressTime)).ToString();
-                Debug.Log("Wait until the cooldown is over; time remaining in seconds : " + timeRemaining);
-
-            }
-
-            else
-            {
-                lastSpacePressTime = Time.time;
-                Debug.Log("Space button pressed; activating 2 seconds cooldown");
-                savedStates.RemoveRange(1, savedStates.Count - 1);
-                cooldownActive = true;
-                //Debug.Log("il y a surement une erreur là");
-            }
-        }
-
-
-        if (Time.time - lastSpacePressTime  >= 2f) //si on a atteint 2 secondes après le dernier appui d'espace (ou après le début de la simulation)
-        {
-            savedStates.RemoveAt(0); //on enlève l'élément d'il y a 2 secondes, soit le premier élément de la liste
-            cooldownActive = false;
-
-
-        }
-
-        List<CircleState> actualState = new List<CircleState>();
+        //sauvegarder components actuels
         for (int i = 0; i < world.PositionComponents.Count; i++)
         {
-            ColorComponent color = world.ColorComponents[i];
-            PositionComponent pos = world.PositionComponents[i];
-            SizeComponent size = world.SizeComponents[i];
-            SpeedComponent speed = world.SpeedComponents[i];
-            actualState.Add(new CircleState(color, pos, size, speed));
+            timestamp = Time.time;
+
+            //ajouter nouveaux components
+            world.PastPositionsComponents[i].pos.Enqueue(world.PositionComponents[i].pos);
+            world.PastSpeedsComponents[i].speeds.Enqueue(world.SpeedComponents[i].speed);
+            world.PastSizesComponents[i].sizes.Enqueue(world.SizeComponents[i].size);
+            world.PastColorsComponents[i].colors.Enqueue(world.ColorComponents[i].color);
+            //et timestamp aus queue
+            world.PastPositionsComponents[i].timestamps.Enqueue(timestamp);
+            world.PastSpeedsComponents[i].timestamps.Enqueue(timestamp);
+            world.PastSizesComponents[i].timestamps.Enqueue(timestamp);
+            world.PastColorsComponents[i].timestamps.Enqueue(timestamp);
+
+
+            //enlever components au dela de 2 secondes
+            while (world.PastPositionsComponents[i].timestamps.Peek() +2 < timestamp)
+            {
+                world.PastPositionsComponents[i].pos.Dequeue();
+                world.PastPositionsComponents[i].timestamps.Dequeue();
+                world.PastSpeedsComponents[i].speeds.Dequeue();
+                world.PastSpeedsComponents[i].timestamps.Dequeue();
+                world.PastSizesComponents[i].sizes.Dequeue();
+                world.PastSizesComponents[i].timestamps.Dequeue();
+                world.PastColorsComponents[i].colors.Dequeue();
+                world.PastColorsComponents[i].timestamps.Dequeue();
+            }
+
+            
+
         }
-
-        savedStates.Add(actualState);
-
-        //frameCounter += 1;
-
-
 
 
     }

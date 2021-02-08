@@ -9,39 +9,61 @@ public class RestoreStateSystem : ISystem
 {
     private ECSManager manager = ECSManager.Instance;
     private World world = World.Instance;
+    private float lastSpacePressTime = 0f;//on ne peut pas appuyer sur espace pendant les deux premières secondes
 
     public void UpdateSystem()
     {
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!SaveStateSystem.cooldownActive)
+            if (Time.time - lastSpacePressTime < 2f)
             {
-                List<CircleState> currentStates = SaveStateSystem.savedStates[0];
-                for (int i = 0; i < currentStates.Count; i++)
-                {
-                    CircleState current_state_i = currentStates[i];
+                string timeRemaining = (2f - (Time.time - lastSpacePressTime)).ToString();
+                Debug.Log("Wait until the cooldown is over; time remaining in seconds : " + timeRemaining);
 
-                    ColorComponent color = current_state_i.colorComponent;
-                    PositionComponent pos = current_state_i.positionComponent;
-                    SizeComponent size = current_state_i.sizeComponent;
-                    SpeedComponent speed = current_state_i.speedComponent;
-
-
-                    world.PositionComponents[i] = pos;
-                    manager.UpdateShapePosition(world.PositionComponents[i].id, world.PositionComponents[i].pos);
-
-                    world.ColorComponents[i] = color;
-                    manager.UpdateShapeColor(world.ColorComponents[i].id, world.ColorComponents[i].color);
-
-                    world.SizeComponents[i] = size;
-                    manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
-
-                    world.SpeedComponents[i] = speed;
-
-                }
             }
 
+            else
+            {
+                lastSpacePressTime = Time.time;
+                Debug.Log("Space button pressed; activating 2 seconds cooldown");
+
+                for (int i = 0; i < world.PastPositionsComponents.Count; i++)
+                {
+
+                    PositionComponent posC = new PositionComponent();
+                    ColorComponent colorC = new ColorComponent();
+                    SizeComponent sizeC = new SizeComponent();
+                    SpeedComponent speedC = new SpeedComponent();
+
+                    posC.id = world.PositionComponents[i].id;
+                    colorC.id = world.ColorComponents[i].id;
+                    sizeC.id = world.SizeComponents[i].id;
+                    speedC.id = world.SpeedComponents[i].id;
+
+                    posC.pos = world.PastPositionsComponents[i].pos.Dequeue();
+                    world.PositionComponents[i] = posC;
+                    world.PastPositionsComponents[i].timestamps.Dequeue();
+                    manager.UpdateShapePosition(world.PositionComponents[i].id, world.PositionComponents[i].pos);
+
+                    colorC.color = world.PastColorsComponents[i].colors.Dequeue();
+                    world.ColorComponents[i] = colorC;
+                    world.PastColorsComponents[i].timestamps.Dequeue();
+                    manager.UpdateShapeColor(world.ColorComponents[i].id, world.ColorComponents[i].color);
+
+                    sizeC.size = world.PastSizesComponents[i].sizes.Dequeue();
+                    world.SizeComponents[i] = sizeC;
+                    world.PastSizesComponents[i].timestamps.Dequeue();
+                    manager.UpdateShapeSize(world.SizeComponents[i].id, world.SizeComponents[i].size);
+
+                    speedC.speed = world.PastSpeedsComponents[i].speeds.Dequeue();
+                    world.SpeedComponents[i] = speedC;
+                    world.PastSpeedsComponents[i].timestamps.Dequeue();
+                }
+
+            }
         }
+
     }
 
 

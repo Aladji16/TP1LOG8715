@@ -13,6 +13,10 @@ public class World
     private List<SizeComponent> _sizeComponents = new List<SizeComponent>();
     private List<InitialSizeComponent> _initsizeComponents = new List<InitialSizeComponent>();
     private List<ColorComponent> _colorComponents = new List<ColorComponent>();
+    private List<PastPositionsComponent> _pposComponents = new List<PastPositionsComponent>();
+    private List<PastSpeedsComponent> _pspeedsComponents = new List<PastSpeedsComponent>();
+    private List<PastSizesComponent> _psizesComponents = new List<PastSizesComponent>();
+    private List<PastColorsComponent> _pcolorsComponents = new List<PastColorsComponent>();
     #endregion
 
     #region Singleton
@@ -51,7 +55,10 @@ public class World
 
     public List<ColorComponent> ColorComponents { get { return _colorComponents; } }
 
-
+    public List<PastPositionsComponent> PastPositionsComponents { get { return _pposComponents; } }
+    public List<PastSpeedsComponent> PastSpeedsComponents { get { return _pspeedsComponents; } }
+    public List<PastSizesComponent> PastSizesComponents { get { return _psizesComponents; } }
+    public List<PastColorsComponent> PastColorsComponents { get { return _pcolorsComponents; } }
 
     #endregion
 

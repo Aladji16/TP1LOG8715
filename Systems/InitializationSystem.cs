@@ -118,7 +118,35 @@ public class InitializationSystem : ISystem
                 }
                 world.ColorComponents.Add(colComponent);
 
+                PastPositionsComponent ppc = new PastPositionsComponent();
+                PastSpeedsComponent pspc = new PastSpeedsComponent();
+                PastSizesComponent psic = new PastSizesComponent();
+                PastColorsComponent pcc = new PastColorsComponent();
+
+                ppc.id = compteur;
+                pspc.id = compteur;
+                psic.id = compteur;
+                pcc.id = compteur;
+
+                ppc.timestamps = new Queue<float>();
+                pspc.timestamps = new Queue<float>();
+                psic.timestamps = new Queue<float>(); ;
+                pcc.timestamps = new Queue<float>();
+
+                ppc.pos = new Queue<Vector2>();
+                pspc.speeds = new Queue<Vector2>();
+                psic.sizes = new Queue<float>();
+                pcc.colors = new Queue<UnityEngine.Color>();
+
+
+                world.PastPositionsComponents.Add(ppc);
+                world.PastSpeedsComponents.Add(pspc);
+                world.PastSizesComponents.Add(psic);
+                world.PastColorsComponents.Add(pcc);
+
                 compteur++;
+
+
             }
 
 
@@ -126,8 +154,6 @@ public class InitializationSystem : ISystem
             isInit = true;
             //Debug.Log("Compteur " + compteur);
 
-
-            //AF : Initialiser couleurs
         }
 
     }

@@ -12,8 +12,8 @@ public class RegisterSystems
         toRegister.Add(new InitializationSystem());
         toRegister.Add(new CollisionSystem(false));
         toRegister.Add(new PositionUpdateSystem(false));
-        toRegister.Add(new RestoreStateSystem());
         toRegister.Add(new SaveStateSystem());
+        toRegister.Add(new RestoreStateSystem());
         for (int i = 0; i < 4; i++)
         {
             toRegister.Add(new CollisionSystem(true));
